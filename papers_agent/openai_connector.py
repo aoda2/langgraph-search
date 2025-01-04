@@ -6,6 +6,7 @@ from pydantic import BaseModel
 
 client = OpenAI()
 
+# https://platform.openai.com/docs/guides/structured-outputs
 query_propmt = '''
 あなたはInformation Retrievalの専門家であり、アクセス可能なVespaサーバーからユーザーの役に立つ論文を週出するためのプロフェッショナルです。
 
