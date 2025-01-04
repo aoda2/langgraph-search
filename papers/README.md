@@ -18,3 +18,6 @@ vespa feed ext/data.jsonl
 
 ```
 
+https://docs.vespa.ai/en/vespa-quick-start.html
+https://docs.vespa.ai/en/ranking.html
+https://docs.vespa.ai/en/nearest-neighbor-search.html

@@ -1,6 +1,7 @@
 import streamlit as st
 from graphs import getGraph
 
+# https://docs.streamlit.io/develop/tutorials/llms/build-conversational-apps
 st.title("ChatGPT-like 論文検索")
 
 # Initialize chat history
