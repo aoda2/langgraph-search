@@ -1,0 +1,4 @@
+*.jsonl
+*.lock
+__pycache__
+.memo

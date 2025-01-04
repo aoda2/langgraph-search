@@ -1,0 +1,56 @@
+schema papers {
+
+    document papers {
+
+        field title type string {
+            indexing: summary | index
+            index: enable-bm25
+        }
+
+        field authors type string {
+            indexing: summary | index
+            index: enable-bm25
+        }
+
+        field url type string {
+            indexing: summary | index
+        }
+
+        field highlight type string {
+            indexing: summary | index
+            index: enable-bm25
+        }
+
+        field abstract type string {
+            indexing: summary | index
+            index: enable-bm25
+        }
+
+        field embedding type tensor<float>(x[1536]) {
+            indexing: attribute | summary | index
+            attribute {
+                distance-metric: angular
+            }
+        }
+    }
+
+    fieldset default {
+        fields: title, url, abstract
+    }
+
+    rank-profile rank_papers inherits default {
+        first-phase {
+            expression: bm25(abstract)
+        }
+    }
+    
+    rank-profile closeness {
+        match-features: distance(field, embedding) closeness(field, embedding)
+        inputs {
+            query(q) tensor<float>(x[1536])
+        }
+        first-phase {
+          expression: closeness(field, embedding)
+        }
+    }
+}
