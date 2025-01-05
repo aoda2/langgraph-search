@@ -9,7 +9,7 @@ def search(state: State):
     # テキストをベクトル化
     query_vector = state["phrase_embedding"]
     # 検索クエリの構築
-    yql = "select title, authors, url, abstract from papers where ({{targetHits:10}}nearestNeighbor(embedding,q)) OR ({})"
+    yql = "select title, authors, url, year, abstract from papers where ({{targetHits:10}}nearestNeighbor(embedding,q)) OR ({})"
     # 条件がある場合は追加、ない場合はtrue（すべてのドキュメントにマッチ）
     where_clause = " or ".join([f"abstract contains \"{k}\""  for k in keywords]) if keywords else "true"
     yql = yql.format(where_clause)
@@ -32,6 +32,7 @@ def search(state: State):
                 "title": hit.get("fields", {}).get("title"),
                 "authors": hit.get("fields", {}).get("authors"),
                 "url": hit.get("fields", {}).get("url"),
+                "year": hit.get("fields", {}).get("year"),
                 "abstract": hit.get("fields", {}).get("abstract", []),
                 "relevance": hit.get("relevance"),
             }

@@ -26,6 +26,10 @@ schema papers {
             index: enable-bm25
         }
 
+        field year type int {
+            indexing: summary | attribute
+        }
+
         field embedding type tensor<float>(x[1536]) {
             indexing: attribute | summary | index
             attribute {
